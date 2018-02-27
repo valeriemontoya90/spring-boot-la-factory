@@ -2,9 +2,13 @@ package com.monapp.entity;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+@Entity
+@Table(name="ordinateur")
 public class Ordinateur extends Materiel {
 
 	private Processeur processeur;

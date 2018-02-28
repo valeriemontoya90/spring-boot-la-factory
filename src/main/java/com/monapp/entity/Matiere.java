@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -47,16 +48,15 @@ public class Matiere {
 	@JsonView(Views.MatiereWithFormation.class)
 	private Formation formation;
 
-	@OneToMany(mappedBy = "matiere", fetch = FetchType.LAZY)
-	@JsonView(Views.MatiereWithFormateurMateriel.class)
-	private List<MatiereMateriel> matiereMateriel = new ArrayList<>();
+	@ManyToMany
+	private List<Materiel> listeDuMateriel = new ArrayList<>();
 
 	public Matiere() {
 		super();
 	}
 
 	public Matiere(String titre, int duree, String objectif, String prerequis, String contenu,
-			List<Competence> competences, Formation formation, List<MatiereMateriel> formateurMateriel) {
+			List<Competence> competences, Formation formation, List<Materiel> listeDuMateriel) {
 		super();
 		this.titre = titre;
 		this.duree = duree;
@@ -131,12 +131,12 @@ public class Matiere {
 		this.formation = formation;
 	}
 
-	public List<MatiereMateriel> getMatiereMateriel() {
-		return matiereMateriel;
+	public List<Materiel> getListeDuMateriel() {
+		return listeDuMateriel;
 	}
 
-	public void setMatiereMateriel(List<MatiereMateriel> matiereMateriel) {
-		this.matiereMateriel = matiereMateriel;
+	public void setListeDuMateriel(List<Materiel> listeDuMateriel) {
+		this.listeDuMateriel = listeDuMateriel;
 	}
 
 	@Override

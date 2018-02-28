@@ -11,6 +11,15 @@ public class Salle extends Materiel {
 
 	private Integer capacite;
 
+	public Salle() {
+		super();
+	}
+
+	public Salle(Integer capacite) {
+		super();
+		this.capacite = capacite;
+	}
+
 	public Integer getCapacite() {
 		return capacite;
 	}
@@ -18,7 +27,5 @@ public class Salle extends Materiel {
 	public void setCapacite(Integer capacite) {
 		this.capacite = capacite;
 	}
-	
-	
 
 }

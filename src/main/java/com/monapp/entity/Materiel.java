@@ -4,14 +4,14 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Version;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
@@ -28,6 +28,9 @@ public abstract class Materiel {
 	private String code;
 	private Double cout;
 	private Boolean isDisponible;
+	
+	@Enumerated(EnumType.STRING)
+	private TypeMateriel type;
 	
 	@Version
 	private int version;
@@ -76,5 +79,12 @@ public abstract class Materiel {
 		this.version = version;
 	}
 	
+	public TypeMateriel getType() {
+		return type;
+	}
+
+	public void setType(TypeMateriel type) {
+		this.type = type;
+	}
 	
 }

@@ -20,6 +20,18 @@ public class Ordinateur extends Materiel {
 	@Temporal(TemporalType.DATE)
 	private Date anneeAchat;
 
+	public Ordinateur() {
+		super();
+	}
+
+	public Ordinateur(Processeur processeur, Integer ram, Integer disqueDur, Date anneeAchat) {
+		super();
+		this.processeur = processeur;
+		this.ram = ram;
+		this.disqueDur = disqueDur;
+		this.anneeAchat = anneeAchat;
+	}
+
 	public Processeur getProcesseur() {
 		return processeur;
 	}
@@ -51,7 +63,5 @@ public class Ordinateur extends Materiel {
 	public void setAnneeAchat(Date anneeAchat) {
 		this.anneeAchat = anneeAchat;
 	}
-
-	
 	
 }

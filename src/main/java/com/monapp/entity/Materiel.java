@@ -38,11 +38,9 @@ public abstract class Materiel {
 	@Column
 	private Boolean isDisponible;
 
-	@Column
 	@OneToMany(mappedBy = "materiel", fetch = FetchType.EAGER)
 	private List<MatiereMateriel> matiereMateriels = new ArrayList<>();
 
-	@Column
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Technicien technicien;
 

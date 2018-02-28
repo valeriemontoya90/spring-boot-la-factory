@@ -8,30 +8,33 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
 @Entity
 @Table(name = "cursus")
 public class CursusDeFormation {
-	
+
 	@Id
 	@GeneratedValue(generator = "cursus_seq")
 	@SequenceGenerator(name = "cursus_seq", sequenceName = "cursus_seq", allocationSize = 1)
 	private int id;
-	
+
 	@Column
 	private String titre;
-	
-	@Column
-	@OneToMany(mappedBy="cursusDeFormation", fetch=FetchType.EAGER)
-	private List<Stagiaire> stagiaires= new ArrayList<>();
-	
-	@Column
-	@ManyToMany(fetch=FetchType.EAGER)
-	private List<Formation> formations =new ArrayList<>();
-	
-	
+
+	@OneToMany(mappedBy = "cursusDeFormation", fetch = FetchType.LAZY)
+	private List<Stagiaire> stagiaires = new ArrayList<>();
+
+	@OneToMany(mappedBy = "cursusDeFormation", fetch = FetchType.LAZY)
+	private List<Formation> formations = new ArrayList<>();
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonView(Views.CursusDeFormationWithGestionnaire.class)
+	private Gestionnaire gestionnaire;
 
 }

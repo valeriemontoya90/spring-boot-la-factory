@@ -1,6 +1,5 @@
 package com.monapp.entity;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,11 +17,9 @@ public class MatiereMateriel {
 	@SequenceGenerator(name = "mam_seq", sequenceName = "mam_seq", allocationSize = 1)
 	private int id;
 
-	@Column
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Matiere matiere;
 
-	@Column
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Materiel materiel;
 

@@ -8,12 +8,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -27,18 +25,15 @@ public class Disponibilite {
 	private int id;
 	
 	@Column
-	@JsonView(Views.Common.class)
 	@Temporal(TemporalType.DATE)
 	private Date dateDebut;
 	
 	@Column
-	@JsonView(Views.Common.class)
 	@Temporal(TemporalType.DATE)
 	private Date dateFin;
 	
-	@Column
-	@JsonView(Views.DisponibiliteWithFormateur.class)
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonView(Views.DisponibiliteWithFormateur.class)
 	private Formateur formateur;
 
 	public Disponibilite() {

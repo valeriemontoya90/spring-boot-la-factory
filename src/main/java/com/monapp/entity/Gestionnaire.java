@@ -3,8 +3,6 @@ package com.monapp.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
@@ -14,10 +12,8 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "gestionnaire")
-@DiscriminatorValue("gestionnaire")
 public class Gestionnaire extends RH {
 
-	@Column
 	@OneToMany(mappedBy = "gestionnaire", fetch = FetchType.EAGER)
 	@JsonView(Views.GestionnaireWithFormation.class)
 	private List<CursusDeFormation> cursusDeFormations = new ArrayList<>();

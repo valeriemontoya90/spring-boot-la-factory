@@ -1,6 +1,7 @@
 package com.monapp.entity;
 
 import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,30 +9,32 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
+import javax.persistence.Version;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 @Entity
-@Table(name="materiel") 	
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="type_materiel")
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "type_materiel")
 @DiscriminatorValue("materiel")
-public class Materiel {
 
+public abstract class Materiel {
+	
 	@Id
 	@GeneratedValue(generator="materiel_seq")
 	@SequenceGenerator(name="materiel_seq", sequenceName="materiel_seq", allocationSize=1)
 	private int id;
+	
 	private String code;
 	private Double cout;
 	private Boolean isDisponible;
 	private TypeMateriel type;
+	
+	@Version
+	private int version;
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
+	public Materiel() {
+		super();
 	}
 
 	public String getCode() {
@@ -65,4 +68,22 @@ public class Materiel {
 	public void setType(TypeMateriel type) {
 		this.type = type;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getVersion() {
+		return version;
+	}
+
+	public void setVersion(int version) {
+		this.version = version;
+	}
+	
+	
 }

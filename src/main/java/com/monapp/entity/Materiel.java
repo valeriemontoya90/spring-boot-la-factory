@@ -1,14 +1,21 @@
 package com.monapp.entity;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="materiel")
-public abstract class Materiel {
+@Table(name="materiel") 	
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="type_materiel")
+@DiscriminatorValue("materiel")
+public class Materiel {
 
 	@Id
 	@GeneratedValue(generator="materiel_seq")
@@ -19,18 +26,6 @@ public abstract class Materiel {
 	private Boolean isDisponible;
 	private TypeMateriel type;
 
-	public Materiel() {
-		super();
-	}
-
-	public Materiel(String code, Double cout, Boolean isDisponible, TypeMateriel type) {
-		super();
-		this.code = code;
-		this.cout = cout;
-		this.isDisponible = isDisponible;
-		this.type = type;
-	}
-		
 	public int getId() {
 		return id;
 	}

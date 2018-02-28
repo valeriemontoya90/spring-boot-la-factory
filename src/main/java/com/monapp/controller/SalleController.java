@@ -27,13 +27,14 @@ public class SalleController {
 		List<Salle> salle = salleDao.findAll();
 		return new ResponseEntity<List<Salle>>(salle, HttpStatus.OK);
 	}
-	 @PostMapping("/salles")
-	    public ResponseEntity<Salle> create(@RequestBody Salle salle) {
-	        if (salle.getId() > 0) {
-	            return new ResponseEntity<Salle>(salle, HttpStatus.BAD_REQUEST);
-	        }
-	        salleDao.save(salle);
-	        return new ResponseEntity<Salle>(salle, HttpStatus.CREATED);
-	    }	
+	
+	@PostMapping("/salles")
+    public ResponseEntity<Salle> create(@RequestBody Salle salle) {
+        if (salle.getId() > 0) {
+            return new ResponseEntity<Salle>(salle, HttpStatus.BAD_REQUEST);
+        }
+        salleDao.save(salle);
+        return new ResponseEntity<Salle>(salle, HttpStatus.CREATED);
+    }	
 	
 }

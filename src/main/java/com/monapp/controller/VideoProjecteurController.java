@@ -27,13 +27,14 @@ public class VideoProjecteurController {
 		List<VideoProjecteur> videoProjecteur = videoProjecteurDao.findAll();
 		return new ResponseEntity<List<VideoProjecteur>>(videoProjecteur, HttpStatus.OK);
 	}
-	 @PostMapping("/videos")
-	    public ResponseEntity<VideoProjecteur> create(@RequestBody VideoProjecteur videoProjecteur) {
-	        if (videoProjecteur.getId() > 0) {
-	            return new ResponseEntity<VideoProjecteur>(videoProjecteur, HttpStatus.BAD_REQUEST);
-	        }
-	        videoProjecteurDao.save(videoProjecteur);
-	        return new ResponseEntity<VideoProjecteur>(videoProjecteur, HttpStatus.CREATED);
-	    }	
+	
+	@PostMapping("/videos")
+    public ResponseEntity<VideoProjecteur> create(@RequestBody VideoProjecteur videoProjecteur) {
+        if (videoProjecteur.getId() > 0) {
+            return new ResponseEntity<VideoProjecteur>(videoProjecteur, HttpStatus.BAD_REQUEST);
+        }
+        videoProjecteurDao.save(videoProjecteur);
+        return new ResponseEntity<VideoProjecteur>(videoProjecteur, HttpStatus.CREATED);
+    }	
 	
 }

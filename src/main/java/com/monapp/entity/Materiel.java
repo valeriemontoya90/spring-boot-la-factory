@@ -28,7 +28,6 @@ public abstract class Materiel {
 	private String code;
 	private Double cout;
 	private Boolean isDisponible;
-	private TypeMateriel type;
 	
 	@Version
 	private int version;
@@ -59,14 +58,6 @@ public abstract class Materiel {
 
 	public void setIsDisponible(Boolean isDisponible) {
 		this.isDisponible = isDisponible;
-	}
-
-	public TypeMateriel getType() {
-		return type;
-	}
-
-	public void setType(TypeMateriel type) {
-		this.type = type;
 	}
 
 	public int getId() {

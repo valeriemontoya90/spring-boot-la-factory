@@ -28,4 +28,8 @@ public class Salle extends Materiel {
 		this.capacite = capacite;
 	}
 
+	@Override
+	public String toString() {
+		return "Salle [capacite=" + capacite + "]";
+	}
 }

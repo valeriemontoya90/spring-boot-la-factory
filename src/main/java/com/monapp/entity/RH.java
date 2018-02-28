@@ -1,13 +1,20 @@
 package com.monapp.entity;
 
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.DiscriminatorType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Version;
 
 @Entity
 @Table(name="rh")
+@Inheritance(strategy=InheritanceType.SINGLE_TABLE) 
+@DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "type_rh")
 public abstract class RH {
 
 	@Id
@@ -19,9 +26,12 @@ public abstract class RH {
 	private String adresse;
 	private String codePostal;
 	private String mail;
+	
+	@Version
+	private int version;
 
 	public RH() {
-		// TODO Auto-generated constructor stub
+		super();
 	}
 	
 	public RH(String nom, String prenom, String adresse, String codePostal, String mail) {
@@ -32,8 +42,6 @@ public abstract class RH {
 		this.codePostal = codePostal;
 		this.mail = mail;
 	}
-
-
 	
 	public int getId() {
 		return id;

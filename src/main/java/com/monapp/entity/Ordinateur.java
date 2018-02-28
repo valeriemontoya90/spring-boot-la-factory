@@ -2,34 +2,41 @@ package com.monapp.entity;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="ordinateur")
+@Table(name = "ordinateur")
 @DiscriminatorValue("ordinateur")
 public class Ordinateur extends Materiel {
 
 	private Processeur processeur;
 	private Integer ram;
 	private Integer disqueDur;
-	
+
 	@Temporal(TemporalType.DATE)
 	private Date anneeAchat;
+	@Column
+	@OneToOne(mappedBy = "ordinateur", fetch = FetchType.EAGER)
+	private Stagiaire stagiaire;
 
 	public Ordinateur() {
 		super();
 	}
 
-	public Ordinateur(Processeur processeur, Integer ram, Integer disqueDur, Date anneeAchat) {
+	public Ordinateur(Processeur processeur, Integer ram, Integer disqueDur, Date anneeAchat, Stagiaire stagiaire) {
 		super();
 		this.processeur = processeur;
 		this.ram = ram;
 		this.disqueDur = disqueDur;
 		this.anneeAchat = anneeAchat;
+		this.stagiaire = stagiaire;
 	}
 
 	public Processeur getProcesseur() {
@@ -63,5 +70,19 @@ public class Ordinateur extends Materiel {
 	public void setAnneeAchat(Date anneeAchat) {
 		this.anneeAchat = anneeAchat;
 	}
-	
+
+	public Stagiaire getStagiaire() {
+		return stagiaire;
+	}
+
+	public void setStagiaire(Stagiaire stagiaire) {
+		this.stagiaire = stagiaire;
+	}
+
+	@Override
+	public String toString() {
+		return "Ordinateur [processeur=" + processeur + ", ram=" + ram + ", disqueDur=" + disqueDur + ", anneeAchat="
+				+ anneeAchat + ", stagiaire=" + stagiaire + "]";
+	}
+
 }

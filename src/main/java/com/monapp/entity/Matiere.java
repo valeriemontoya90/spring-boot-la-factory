@@ -65,7 +65,7 @@ public class Matiere {
 
 	@Column
 	@OneToMany(mappedBy = "matiere", fetch = FetchType.EAGER)
-	@JsonView(Views.MatiereWithFormateurMateriel.class)
+	@JsonView(Views.MatiereWithMatiereMateriel.class)
 	private List<MatiereMateriel> matiereMateriel = new ArrayList<>();
 
 	public Matiere() {

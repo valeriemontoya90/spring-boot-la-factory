@@ -28,9 +28,11 @@ public class CursusDeFormation {
 	private String titre;
 
 	@OneToMany(mappedBy = "cursusDeFormation", fetch = FetchType.LAZY)
+	@JsonView(Views.CursusDeFormationWithStagiaire.class)
 	private List<Stagiaire> stagiaires = new ArrayList<>();
 
 	@OneToMany(mappedBy = "cursusDeFormation", fetch = FetchType.LAZY)
+	@JsonView(Views.CursusDeFormationWithFormation.class)
 	private List<Formation> formations = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.EAGER)

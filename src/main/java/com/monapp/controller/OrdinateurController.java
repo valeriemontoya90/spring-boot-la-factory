@@ -60,7 +60,6 @@ public class OrdinateurController {
 			return create(ordinateur);
 		}
 		ordinateur = ordinateurDao.update(ordinateur);
-
 		return new ResponseEntity<Ordinateur>(ordinateur, HttpStatus.OK);
 	}
 

@@ -39,16 +39,6 @@ public class TechnicienController {
 		return new ResponseEntity<List<Technicien>>(techniciens, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/techniciens/{id}")
-	public ResponseEntity<Technicien> delete(@PathVariable("id") Integer id) {
-		Technicien liv = technicienDao.findByPrimaryKey(id);
-		if (liv == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-	}
-
 	@PostMapping("/techniciens")
 	public ResponseEntity<Technicien> create(@RequestBody Technicien technicien) {
 		if (technicien.getId() > 0) {
@@ -65,6 +55,17 @@ public class TechnicienController {
 		}
 		technicien = technicienDao.update(technicien);
 		return new ResponseEntity<Technicien>(technicien, HttpStatus.OK);
+	}
+
+	@DeleteMapping("/techniciens/{id}")
+	public ResponseEntity<Technicien> delete(@PathVariable("id") Integer id) {
+		Technicien tmp = technicienDao.findByPrimaryKey(id);
+		if (tmp == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			technicienDao.delete(tmp);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
 	}
 
 }

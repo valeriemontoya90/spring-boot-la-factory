@@ -39,16 +39,6 @@ public class StagiaireController {
 		return new ResponseEntity<List<Stagiaire>>(stagiaires, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/stagiaires/{id}")
-	public ResponseEntity<Stagiaire> delete(@PathVariable("id") Integer id) {
-		Stagiaire liv = stagiaireDao.findByPrimaryKey(id);
-		if (liv == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-	}
-
 	@PostMapping("/stagiaires")
 	public ResponseEntity<Stagiaire> create(@RequestBody Stagiaire stagiaire) {
 		if (stagiaire.getId() > 0) {
@@ -65,6 +55,17 @@ public class StagiaireController {
 		}
 		stagiaire = stagiaireDao.update(stagiaire);
 		return new ResponseEntity<Stagiaire>(stagiaire, HttpStatus.OK);
+	}
+
+	@DeleteMapping("/stagiaires/{id}")
+	public ResponseEntity<Stagiaire> delete(@PathVariable("id") Integer id) {
+		Stagiaire tmp = stagiaireDao.findByPrimaryKey(id);
+		if (tmp == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			stagiaireDao.delete(tmp);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
 	}
 
 }

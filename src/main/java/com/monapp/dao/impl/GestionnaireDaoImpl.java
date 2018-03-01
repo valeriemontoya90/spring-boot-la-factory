@@ -17,6 +17,7 @@ import com.monapp.entity.Gestionnaire;
 @Transactional
 @Repository
 public class GestionnaireDaoImpl implements GestionnaireDao {
+	
 	@PersistenceContext
 	EntityManager em;
 

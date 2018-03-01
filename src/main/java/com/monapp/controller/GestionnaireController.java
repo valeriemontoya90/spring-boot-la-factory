@@ -22,6 +22,7 @@ import com.monapp.entity.Gestionnaire;
 @RestController
 @CrossOrigin
 public class GestionnaireController {
+	
 	@Autowired
 	GestionnaireDao gestionnaireDao;
 
@@ -34,23 +35,15 @@ public class GestionnaireController {
 			return new ResponseEntity<Gestionnaire>(gestionnaire, HttpStatus.OK);
 		}
 	}
-
+	
+	@CrossOrigin
 	@GetMapping("/gestionnaires")
 	public ResponseEntity<List<Gestionnaire>> findAll() {
 		List<Gestionnaire> gestionnaires = gestionnaireDao.findAll();
 		return new ResponseEntity<List<Gestionnaire>>(gestionnaires, HttpStatus.OK);
 	}
-
-	@DeleteMapping("/gestionnaires/{id}")
-	public ResponseEntity<Gestionnaire> delete(@PathVariable("id") Integer id) {
-		Gestionnaire liv = gestionnaireDao.findByPrimaryKey(id);
-		if (liv == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-	}
-
+	
+	@CrossOrigin
 	@PostMapping("/gestionnaires")
 	public ResponseEntity<Gestionnaire> create(@RequestBody Gestionnaire gestionnaire) {
 		if (gestionnaire.getId() > 0) {
@@ -60,6 +53,7 @@ public class GestionnaireController {
 		return new ResponseEntity<Gestionnaire>(gestionnaire, HttpStatus.CREATED);
 	}
 
+	@CrossOrigin
 	@PutMapping("/gestionnaires")
 	public ResponseEntity<Gestionnaire> update(@RequestBody Gestionnaire gestionnaire) {
 		if (gestionnaire.getId() == 0) {
@@ -67,6 +61,18 @@ public class GestionnaireController {
 		}
 		gestionnaire = gestionnaireDao.update(gestionnaire);
 		return new ResponseEntity<Gestionnaire>(gestionnaire, HttpStatus.OK);
+	}
+	
+	@CrossOrigin
+	@DeleteMapping("/gestionnaires/{id}")
+	public ResponseEntity<Gestionnaire> delete(@PathVariable("id") Integer id) {
+		Gestionnaire tmp = gestionnaireDao.findByPrimaryKey(id);
+		if (tmp == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			gestionnaireDao.delete(tmp);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
 	}
 
 }

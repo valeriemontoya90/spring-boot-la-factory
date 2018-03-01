@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @DiscriminatorValue("stagiaire")
 public class Stagiaire extends RH {
 	
-	@ManyToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JsonView(Views.StagiaireWithCursusDeFormation.class)
 	private CursusDeFormation cursusDeFormation;
 

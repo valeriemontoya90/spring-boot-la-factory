@@ -14,13 +14,14 @@ public interface Views {
 	public interface FormationWithMatiere extends Common{}
 	
 	public interface Gestionnaire extends Common{}
-	public interface GestionnaireWithFormation extends Gestionnaire{}
+	public interface GestionnaireWithCursusDeFormation extends Gestionnaire{}
 	
 	public interface Technicien extends Common{}
 	public interface TechnicienWithMateriel extends Technicien{}
 	
 	public interface CursusDeFormation extends Common{}
 	public interface CursusDeFormationWithStagiaire extends CursusDeFormation{}
+	public interface CursusDeFormationWithFormation extends CursusDeFormation{}
 	public interface CursusDeFormationWithGestionnaire extends CursusDeFormation{}
 	
 	public interface Stagiaire extends Common{}

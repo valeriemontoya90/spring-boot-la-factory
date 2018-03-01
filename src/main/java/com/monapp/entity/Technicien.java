@@ -20,24 +20,24 @@ public class Technicien extends RH {
 	@Column
 	@OneToMany(mappedBy = "technicien", fetch = FetchType.EAGER)
 	@JsonView(Views.TechnicienWithMateriel.class)
-	private List<Materiel> materiel = new ArrayList<>();
+	private List<Materiel> matos = new ArrayList<>();
 
 	public Technicien() {
 		super();
 
 	}
 
-	public Technicien(List<Materiel> materiel) {
+	public Technicien(List<Materiel> matos) {
 		super();
-		this.materiel = materiel;
+		this.matos = matos;
 	}
 
-	public List<Materiel> getMateriel() {
-		return materiel;
+	public List<Materiel> getMatos() {
+		return matos;
 	}
 
-	public void setMateriel(List<Materiel> materiel) {
-		this.materiel = materiel;
+	public void setMatos(List<Materiel> materiel) {
+		this.matos = materiel;
 	}
 
 }

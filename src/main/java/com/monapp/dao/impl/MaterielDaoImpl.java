@@ -13,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import com.monapp.dao.MaterielDao;
 import com.monapp.entity.Materiel;
-import com.monapp.entity.Ordinateur;
 
 @Transactional
 @Repository
@@ -23,9 +22,8 @@ public class MaterielDaoImpl implements MaterielDao {
 	EntityManager em;
 
 	@Override
-	public Ordinateur findByPrimaryKey(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Materiel findByPrimaryKey(Integer id) {
+		return em.find(Materiel.class, id);
 	}
 
 	@Override
@@ -39,8 +37,6 @@ public class MaterielDaoImpl implements MaterielDao {
 		return em.createQuery(crit).getResultList();
 	}
 
-
-
 	@Override
 	public Materiel save(Materiel entity) {
 		em.persist(entity);
@@ -49,14 +45,13 @@ public class MaterielDaoImpl implements MaterielDao {
 
 	@Override
 	public void delete(Materiel entity) {
-		// TODO Auto-generated method stub
-		
+		entity = em.merge(entity);
+		em.remove(entity);
 	}
 
 	@Override
 	public Materiel update(Materiel entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.merge(entity);
 	}
 
 

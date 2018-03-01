@@ -23,8 +23,7 @@ public class SalleDaoImpl implements SalleDao {
 
 	@Override
 	public Salle findByPrimaryKey(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.find(Salle.class, id);
 	}
 
 	@Override
@@ -46,14 +45,13 @@ public class SalleDaoImpl implements SalleDao {
 
 	@Override
 	public void delete(Salle entity) {
-		// TODO Auto-generated method stub
-		
+		entity = em.merge(entity);
+		em.remove(entity);
 	}
 
 	@Override
 	public Salle update(Salle entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.merge(entity);
 	}
 
 

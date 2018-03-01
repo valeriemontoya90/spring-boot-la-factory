@@ -11,26 +11,26 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.monapp.dao.VideoProjecteurDao;
-import com.monapp.entity.VideoProjecteur;
+import com.monapp.dao.MatiereDao;
+import com.monapp.entity.Matiere;
 
 @Transactional
 @Repository
-public class VideoProjecteurDaoImpl implements VideoProjecteurDao {
+public class MatiereDaoImpl implements MatiereDao {
 
 	@PersistenceContext
 	EntityManager em;
 
 	@Override
-	public VideoProjecteur findByPrimaryKey(Integer id) {
-		return em.find(VideoProjecteur.class, id);
+	public Matiere findByPrimaryKey(Integer id) {
+		return em.find(Matiere.class, id);
 	}
 
 	@Override
-	public List<VideoProjecteur> findAll() {
+	public List<Matiere> findAll() {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<VideoProjecteur> crit = cb.createQuery(VideoProjecteur.class);
-		Root<VideoProjecteur> r = crit.from(VideoProjecteur.class);
+		CriteriaQuery<Matiere> crit = cb.createQuery(Matiere.class);
+		Root<Matiere> r = crit.from(Matiere.class);
 		
 		crit.select(r);
 		
@@ -38,19 +38,19 @@ public class VideoProjecteurDaoImpl implements VideoProjecteurDao {
 	}
 
 	@Override
-	public VideoProjecteur save(VideoProjecteur entity) {
+	public Matiere save(Matiere entity) {
 		em.persist(entity);
 		return entity;
 	}
 
 	@Override
-	public void delete(VideoProjecteur entity) {
+	public void delete(Matiere entity) {
 		entity = em.merge(entity);
 		em.remove(entity);
 	}
 
 	@Override
-	public VideoProjecteur update(VideoProjecteur entity) {
+	public Matiere update(Matiere entity) {
 		return em.merge(entity);
 	}
 

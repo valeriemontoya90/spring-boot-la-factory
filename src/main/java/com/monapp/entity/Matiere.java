@@ -3,11 +3,14 @@ package com.monapp.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -48,7 +51,13 @@ public class Matiere {
 	@JsonView(Views.MatiereWithFormation.class)
 	private Formation formation;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name="matiereMatos",
+    joinColumns=
+        @JoinColumn(name="miere_id", referencedColumnName="id"),
+    inverseJoinColumns=
+        @JoinColumn(name="matos_id", referencedColumnName="id")
+    )
 	private List<Materiel> listeDuMateriel = new ArrayList<>();
 
 	public Matiere() {

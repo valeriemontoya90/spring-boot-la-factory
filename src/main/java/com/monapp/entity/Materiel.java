@@ -1,8 +1,11 @@
 package com.monapp.entity;
 
+
+
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
@@ -19,9 +22,22 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Version;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "type_materiel")
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
+@JsonSubTypes({
+    @JsonSubTypes.Type(value = Salle.class, name = "Salle"),
+    @JsonSubTypes.Type(value = VideoProjecteur.class, name = "VideoProjecteur"),
+    @JsonSubTypes.Type(value = Ordinateur.class, name = "Ordinateur") }
+)
+
+
 public abstract class Materiel {
 
 	@Id
@@ -38,7 +54,7 @@ public abstract class Materiel {
 	@Column
 	private Boolean isDisponible;
 
-	@ManyToMany(mappedBy = "listeDuMateriel", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "listeDuMateriel", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Matiere> matieres = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.EAGER)

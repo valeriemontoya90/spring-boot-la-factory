@@ -37,8 +37,6 @@ public class OrinateurDaoImpl implements OrdinateurDao {
 		return em.createQuery(crit).getResultList();
 	}
 
-
-
 	@Override
 	public Ordinateur save(Ordinateur entity) {
 		em.persist(entity);

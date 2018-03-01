@@ -27,8 +27,8 @@ public class OrdinateurController {
 	@CrossOrigin
 	@GetMapping("/ordinateurs")
 	public ResponseEntity<List<Ordinateur>> findAll() {
-		List<Ordinateur> ordinateur = ordinateurDao.findAll();
-		return new ResponseEntity<List<Ordinateur>>(ordinateur, HttpStatus.OK);
+		List<Ordinateur> ordinateurs = ordinateurDao.findAll();
+		return new ResponseEntity<List<Ordinateur>>(ordinateurs, HttpStatus.OK);
 	}
 	
 	@CrossOrigin
@@ -47,7 +47,7 @@ public class OrdinateurController {
 	@PostMapping("/ordinateurs")
 	public ResponseEntity<Ordinateur> create(@RequestBody Ordinateur ordinateur) {
 		if (ordinateur.getId() > 0) {
-			return new ResponseEntity<Ordinateur>(ordinateur, HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<Ordinateur>(HttpStatus.BAD_REQUEST);
 		}
 		ordinateurDao.save(ordinateur);
 		return new ResponseEntity<Ordinateur>(ordinateur, HttpStatus.CREATED);

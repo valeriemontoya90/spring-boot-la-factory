@@ -15,7 +15,7 @@ import javax.persistence.Version;
 @Table(name="rh")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE) 
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "type_rh")
-public abstract class RH {
+public class RH {
 
 	@Id
 	@GeneratedValue(generator="rh_seq")
@@ -32,15 +32,6 @@ public abstract class RH {
 
 	public RH() {
 		super();
-	}
-	
-	public RH(String nom, String prenom, String adresse, String codePostal, String mail) {
-		super();
-		this.nom = nom;
-		this.prenom = prenom;
-		this.adresse = adresse;
-		this.codePostal = codePostal;
-		this.mail = mail;
 	}
 	
 	public int getId() {

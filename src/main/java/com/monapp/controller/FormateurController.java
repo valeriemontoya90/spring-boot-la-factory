@@ -22,11 +22,19 @@ import com.monapp.entity.Views;
 @RestController
 @CrossOrigin
 public class FormateurController {
+	
 	@Autowired
 	FormateurDao formateurDao;
 
+	@CrossOrigin
+	@GetMapping("/formateurs")
+	public ResponseEntity<List<Formateur>> findAll() {
+		List<Formateur> formateurs = formateurDao.findAll();
+		return new ResponseEntity<List<Formateur>>(formateurs, HttpStatus.OK);
+	}
+
+	@CrossOrigin
 	@GetMapping("/formateurs/{id}")
-	@JsonView(Views.FormateurWithAll.class)
 	public ResponseEntity<Formateur> findOne(@PathVariable("id") Integer id) {
 		Formateur formateur = formateurDao.findByPrimaryKey(id);
 		if (formateur == null) {
@@ -36,25 +44,8 @@ public class FormateurController {
 		}
 	}
 
-	@GetMapping("/formateurs")
-	@JsonView(Views.FormateurWithAll.class)
-	public ResponseEntity<List<Formateur>> findAll() {
-		List<Formateur> formateurs = formateurDao.findAll();
-		return new ResponseEntity<List<Formateur>>(formateurs, HttpStatus.OK);
-	}
-
-	@DeleteMapping("/formateurs/{id}")
-	public ResponseEntity<Formateur> delete(@PathVariable("id") Integer id) {
-		Formateur liv = formateurDao.findByPrimaryKey(id);
-		if (liv == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} else {
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
-	}
-
+	@CrossOrigin
 	@PostMapping("/formateurs")
-	@JsonView(Views.FormateurWithAll.class)
 	public ResponseEntity<Formateur> create(@RequestBody Formateur formateur) {
 		if (formateur.getId() > 0) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -63,6 +54,7 @@ public class FormateurController {
 		return new ResponseEntity<Formateur>(formateur, HttpStatus.CREATED);
 	}
 
+	@CrossOrigin
 	@PutMapping("/formateurs")
 	@JsonView(Views.FormateurWithAll.class)
 	public ResponseEntity<Formateur> update(@RequestBody Formateur formateur) {
@@ -71,6 +63,18 @@ public class FormateurController {
 		}
 		formateur = formateurDao.update(formateur);
 		return new ResponseEntity<Formateur>(formateur, HttpStatus.OK);
+	}
+
+	@CrossOrigin
+	@DeleteMapping("/formateurs/{id}")
+	public ResponseEntity<Formateur> delete(@PathVariable("id") Integer id) {
+		Formateur tmp = formateurDao.findByPrimaryKey(id);
+		if (tmp == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			formateurDao.delete(tmp);
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
 	}
 
 }

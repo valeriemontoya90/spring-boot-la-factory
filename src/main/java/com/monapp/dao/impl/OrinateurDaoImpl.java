@@ -44,17 +44,14 @@ public class OrinateurDaoImpl implements OrdinateurDao {
 	}
 
 	@Override
-	public void delete(Ordinateur entity) {
-		entity = em.merge(entity);
-		em.remove(entity);
-	}
-
-	@Override
 	public Ordinateur update(Ordinateur entity) {
 		return em.merge(entity);
 	}
 
-
-
+	@Override
+	public void delete(Ordinateur entity) {
+		entity = em.merge(entity);
+		em.remove(entity);
+	}
 
 }

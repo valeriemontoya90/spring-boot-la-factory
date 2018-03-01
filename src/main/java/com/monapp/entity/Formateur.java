@@ -3,6 +3,7 @@ package com.monapp.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ManyToMany;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "formateur")
+@DiscriminatorValue("formateur")
 public class Formateur extends RH {
 
 	@OneToMany(mappedBy = "formateur", fetch = FetchType.LAZY)

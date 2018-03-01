@@ -14,10 +14,12 @@ import org.springframework.stereotype.Repository;
 
 import com.monapp.dao.FormateurDao;
 import com.monapp.entity.Formateur;
+import com.monapp.entity.Ordinateur;
 
 @Transactional
 @Repository
 public class FormateurDaoImpl implements FormateurDao {
+	
 	@PersistenceContext
 	EntityManager em;
 
@@ -42,20 +44,19 @@ public class FormateurDaoImpl implements FormateurDao {
 
 	@Override
 	public Formateur save(Formateur entity) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void delete(Formateur entity) {
-		// TODO Auto-generated method stub
-
+		em.persist(entity);
+		return entity;
 	}
 
 	@Override
 	public Formateur update(Formateur entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.merge(entity);
+	}
+
+	@Override
+	public void delete(Formateur entity) {
+		entity = em.merge(entity);
+		em.remove(entity);
 	}
 
 }

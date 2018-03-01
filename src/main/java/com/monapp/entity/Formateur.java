@@ -17,7 +17,7 @@ import com.fasterxml.jackson.annotation.JsonView;
 @DiscriminatorValue("formateur")
 public class Formateur extends RH {
 
-	@OneToMany(mappedBy = "formateur", fetch = FetchType.LAZY)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JsonView(Views.FormateurWithDisponibilite.class)
 	private List<Disponibilite> disponibilites = new ArrayList<>();
 

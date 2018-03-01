@@ -1,6 +1,8 @@
 package com.monapp.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -32,9 +34,9 @@ public class Disponibilite {
 	@Temporal(TemporalType.DATE)
 	private Date dateFin;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "disponibilites", fetch = FetchType.LAZY)
 	@JsonView(Views.DisponibiliteWithFormateur.class)
-	private Formateur formateur;
+	private List<Formateur> formateurs = new ArrayList<>();
 
 	public Disponibilite() {
 		super();
@@ -44,7 +46,6 @@ public class Disponibilite {
 		super();
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
-		this.formateur = formateur;
 	}
 
 	public int getId() {
@@ -71,18 +72,18 @@ public class Disponibilite {
 		this.dateFin = dateFin;
 	}
 
-	public Formateur getFormateur() {
-		return formateur;
+	public List<Formateur> getFormateurs() {
+		return formateurs;
 	}
 
-	public void setFormateur(Formateur formateur) {
-		this.formateur = formateur;
+	public void setFormateurs(List<Formateur> formateurs) {
+		this.formateurs = formateurs;
 	}
 
 	@Override
 	public String toString() {
-		return "Disponibilite [id=" + id + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", formateur="
-				+ formateur + "]";
+		return "Disponibilite [id=" + id + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", formateurs="
+				+ formateurs + "]";
 	}
 	
 }

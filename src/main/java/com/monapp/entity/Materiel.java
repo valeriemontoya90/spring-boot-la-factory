@@ -25,6 +25,7 @@ import javax.persistence.Version;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -38,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 //)
 
 
-public abstract class Materiel {
+public class Materiel {
 
 	@Id
 	@GeneratedValue(generator = "materiel_seq")
@@ -55,6 +56,7 @@ public abstract class Materiel {
 	private Boolean isDisponible;
 
 	@ManyToMany(mappedBy = "listeDuMateriel", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JsonView(Views.MaterielWithMatiere.class)
 	private List<Matiere> matieres = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.EAGER)

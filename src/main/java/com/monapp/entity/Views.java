@@ -34,6 +34,7 @@ public interface Views {
 	public interface Matiere extends Common{}
 	public interface MatiereWithCompetence extends Matiere{}
 	public interface MatiereWithFormation extends Matiere{}
+	public interface MatiereWithMateriel extends Matiere{}
 	
 	public interface Competence extends Common{}
 	public interface CompetenceWithMatiere extends Competence{}
@@ -44,5 +45,6 @@ public interface Views {
 	
 	public interface Materiel extends Common{}
 	public interface MaterielWithTechnicien extends Materiel{}
+	public interface MaterielWithMatiere extends Materiel{}
 
 }

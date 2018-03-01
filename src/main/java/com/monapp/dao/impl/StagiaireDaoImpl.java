@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -23,12 +22,7 @@ public class StagiaireDaoImpl implements StagiaireDao {
 
 	@Override
 	public Stagiaire findByPrimaryKey(Integer id) {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Stagiaire> cq = cb.createQuery(Stagiaire.class);
-		Root<Stagiaire> model = cq.from(Stagiaire.class);
-		cq.where(cb.equal(model.get("id"), id));
-		TypedQuery<Stagiaire> q = em.createQuery(cq);
-		return q.getSingleResult();
+		return em.find(Stagiaire.class, id);
 	}
 
 	@Override
@@ -42,20 +36,20 @@ public class StagiaireDaoImpl implements StagiaireDao {
 
 	@Override
 	public Stagiaire save(Stagiaire entity) {
-		// TODO Auto-generated method stub
-		return null;
+		em.persist(entity);
+		return entity;
 	}
 
 	@Override
 	public void delete(Stagiaire entity) {
-		// TODO Auto-generated method stub
+		entity = em.merge(entity);
+		em.remove(entity);
 
 	}
 
 	@Override
 	public Stagiaire update(Stagiaire entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.merge(entity);
 	}
 
 }

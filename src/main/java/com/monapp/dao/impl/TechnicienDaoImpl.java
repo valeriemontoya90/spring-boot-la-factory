@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -23,12 +22,7 @@ public class TechnicienDaoImpl implements TechnicienDao {
 
 	@Override
 	public Technicien findByPrimaryKey(Integer id) {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Technicien> cq = cb.createQuery(Technicien.class);
-		Root<Technicien> model = cq.from(Technicien.class);
-		cq.where(cb.equal(model.get("id"), id));
-		TypedQuery<Technicien> q = em.createQuery(cq);
-		return q.getSingleResult();
+		return em.find(Technicien.class, id);
 	}
 
 	@Override
@@ -42,20 +36,20 @@ public class TechnicienDaoImpl implements TechnicienDao {
 
 	@Override
 	public Technicien save(Technicien entity) {
-		// TODO Auto-generated method stub
-		return null;
+		em.persist(entity);
+		return entity;
 	}
 
 	@Override
 	public void delete(Technicien entity) {
-		// TODO Auto-generated method stub
+		entity = em.merge(entity);
+		em.remove(entity);
 
 	}
 
 	@Override
 	public Technicien update(Technicien entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.merge(entity);
 	}
 
 }

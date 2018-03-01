@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -14,7 +13,6 @@ import org.springframework.stereotype.Repository;
 
 import com.monapp.dao.FormateurDao;
 import com.monapp.entity.Formateur;
-import com.monapp.entity.Ordinateur;
 
 @Transactional
 @Repository
@@ -25,12 +23,7 @@ public class FormateurDaoImpl implements FormateurDao {
 
 	@Override
 	public Formateur findByPrimaryKey(Integer id) {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Formateur> cq = cb.createQuery(Formateur.class);
-		Root<Formateur> model = cq.from(Formateur.class);
-		cq.where(cb.equal(model.get("id"), id));
-		TypedQuery<Formateur> q = em.createQuery(cq);
-		return q.getSingleResult();
+		return em.find(Formateur.class, id);
 	}
 
 	@Override

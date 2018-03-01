@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.monapp.dao.StagiaireDao;
 import com.monapp.entity.Stagiaire;
-import com.monapp.entity.Views;
 
 @RestController
 @CrossOrigin
@@ -26,7 +24,6 @@ public class StagiaireController {
 	StagiaireDao stagiaireDao;
 
 	@GetMapping("/stagiaires/{id}")
-	@JsonView(Views.StagiaireWithAll.class)
 	public ResponseEntity<Stagiaire> findOne(@PathVariable("id") Integer id) {
 		Stagiaire stagiaire = stagiaireDao.findByPrimaryKey(id);
 		if (stagiaire == null) {
@@ -37,7 +34,6 @@ public class StagiaireController {
 	}
 
 	@GetMapping("/stagiaires")
-	@JsonView(Views.StagiaireWithAll.class)
 	public ResponseEntity<List<Stagiaire>> findAll() {
 		List<Stagiaire> stagiaires = stagiaireDao.findAll();
 		return new ResponseEntity<List<Stagiaire>>(stagiaires, HttpStatus.OK);
@@ -54,7 +50,6 @@ public class StagiaireController {
 	}
 
 	@PostMapping("/stagiaires")
-	@JsonView(Views.StagiaireWithAll.class)
 	public ResponseEntity<Stagiaire> create(@RequestBody Stagiaire stagiaire) {
 		if (stagiaire.getId() > 0) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -64,7 +59,6 @@ public class StagiaireController {
 	}
 
 	@PutMapping("/stagiaires")
-	@JsonView(Views.StagiaireWithAll.class)
 	public ResponseEntity<Stagiaire> update(@RequestBody Stagiaire stagiaire) {
 		if (stagiaire.getId() == 0) {
 			return create(stagiaire);

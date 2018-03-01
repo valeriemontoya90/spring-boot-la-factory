@@ -16,7 +16,7 @@ import com.monapp.entity.Ordinateur;
 
 @Transactional
 @Repository
-public class OrinateurDaoImpl implements OrdinateurDao {
+public class OrdinateurDaoImpl implements OrdinateurDao {
 
 	@PersistenceContext
 	EntityManager em;

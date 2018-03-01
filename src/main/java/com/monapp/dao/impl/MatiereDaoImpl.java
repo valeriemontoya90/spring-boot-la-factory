@@ -18,43 +18,39 @@ import com.monapp.entity.Matiere;
 @Repository
 public class MatiereDaoImpl implements MatiereDao {
 
-	@PersistenceContext
-	EntityManager em;
+    @PersistenceContext
+    EntityManager em;
 
-	@Override
-	public Matiere findByPrimaryKey(Integer id) {
-		return em.find(Matiere.class, id);
-	}
+    @Override
+    public Matiere findByPrimaryKey(Integer id) {
+        return em.find(Matiere.class, id);
+    }
 
-	@Override
-	public List<Matiere> findAll() {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Matiere> crit = cb.createQuery(Matiere.class);
-		Root<Matiere> r = crit.from(Matiere.class);
-		
-		crit.select(r);
-		
-		return em.createQuery(crit).getResultList();
-	}
+    @Override
+    public List<Matiere> findAll() {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Matiere> crit = cb.createQuery(Matiere.class);
+        Root<Matiere> r = crit.from(Matiere.class);
+        
+        crit.select(r);
+        
+        return em.createQuery(crit).getResultList();
+    }
 
-	@Override
-	public Matiere save(Matiere entity) {
-		em.persist(entity);
-		return entity;
-	}
+    @Override
+    public Matiere save(Matiere entity) {
+        em.persist(entity);
+        return entity;
+    }
 
-	@Override
-	public void delete(Matiere entity) {
-		entity = em.merge(entity);
-		em.remove(entity);
-	}
+    @Override
+    public void delete(Matiere entity) {
+        entity = em.merge(entity);
+        em.remove(entity);
+    }
 
-	@Override
-	public Matiere update(Matiere entity) {
-		return em.merge(entity);
-	}
-
-
-
-
+    @Override
+    public Matiere update(Matiere entity) {
+        return em.merge(entity);
+    }
 }

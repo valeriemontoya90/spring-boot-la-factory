@@ -21,59 +21,59 @@ import com.monapp.entity.Matiere;
 @RestController
 public class MatiereController {
 
-	@Autowired
-	MatiereDao matiereDao;
+    @Autowired
+    MatiereDao matiereDao;
 
-	@CrossOrigin
-	@GetMapping("/matieres")
-	public ResponseEntity<List<Matiere>> findAll() {
-		List<Matiere> matiere = matiereDao.findAll();
-		return new ResponseEntity<List<Matiere>>(matiere, HttpStatus.OK);
-	}
-	
-	@CrossOrigin
-	@GetMapping("/matieres/{id}")
-	public ResponseEntity<Matiere> findOne(@PathVariable("id") Integer id) {
-		Matiere matiere = matiereDao.findByPrimaryKey(id);
+    @CrossOrigin
+    @GetMapping("/matieres")
+    public ResponseEntity<List<Matiere>> findAll() {
+        List<Matiere> matiere = matiereDao.findAll();
+        return new ResponseEntity<List<Matiere>>(matiere, HttpStatus.OK);
+    }
+    
+    @CrossOrigin
+    @GetMapping("/matieres/{id}")
+    public ResponseEntity<Matiere> findOne(@PathVariable("id") Integer id) {
+        Matiere matiere = matiereDao.findByPrimaryKey(id);
 
-		if (matiere == null) {
-			return new ResponseEntity<Matiere>(matiere, HttpStatus.NOT_FOUND);
-		} else {
-			return new ResponseEntity<Matiere>(matiere, HttpStatus.OK);
-		}
-	}
-	
-	@CrossOrigin
-	@PostMapping("/matieres")
-	public ResponseEntity<Matiere> create(@RequestBody Matiere matiere) {
-		if (matiere.getId() > 0) {
-			return new ResponseEntity<Matiere>(matiere, HttpStatus.BAD_REQUEST);
-		}
-		matiereDao.save(matiere);
-		return new ResponseEntity<Matiere>(matiere, HttpStatus.CREATED);
-	}
+        if (matiere == null) {
+            return new ResponseEntity<Matiere>(matiere, HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<Matiere>(matiere, HttpStatus.OK);
+        }
+    }
+    
+    @CrossOrigin
+    @PostMapping("/matieres")
+    public ResponseEntity<Matiere> create(@RequestBody Matiere matiere) {
+        if (matiere.getId() > 0) {
+            return new ResponseEntity<Matiere>(matiere, HttpStatus.BAD_REQUEST);
+        }
+        matiereDao.save(matiere);
+        return new ResponseEntity<Matiere>(matiere, HttpStatus.CREATED);
+    }
 
-	@CrossOrigin
-	@PutMapping("/matieres")
-	public ResponseEntity<Matiere> update(@RequestBody Matiere matiere) {
-		if (matiere.getId() == 0) {
-			return create(matiere);
-		}
-		matiere = matiereDao.update(matiere);
+    @CrossOrigin
+    @PutMapping("/matieres")
+    public ResponseEntity<Matiere> update(@RequestBody Matiere matiere) {
+        if (matiere.getId() == 0) {
+            return create(matiere);
+        }
+        matiere = matiereDao.update(matiere);
 
-		return new ResponseEntity<Matiere>(matiere, HttpStatus.OK);
-	}
+        return new ResponseEntity<Matiere>(matiere, HttpStatus.OK);
+    }
 
-	@CrossOrigin
-	@DeleteMapping("/matieres/{id}")
-	public ResponseEntity<Matiere> delete(@PathVariable("id") Integer id){
-		Matiere tmp = matiereDao.findByPrimaryKey(id);
-		if (tmp == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		} else {
-			matiereDao.delete(tmp);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}	
-	}	
+    @CrossOrigin
+    @DeleteMapping("/matieres/{id}")
+    public ResponseEntity<Matiere> delete(@PathVariable("id") Integer id){
+        Matiere tmp = matiereDao.findByPrimaryKey(id);
+        if (tmp == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            matiereDao.delete(tmp);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }    
+    }    
 
 }

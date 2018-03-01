@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -23,12 +22,7 @@ public class GestionnaireDaoImpl implements GestionnaireDao {
 
 	@Override
 	public Gestionnaire findByPrimaryKey(Integer id) {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-		CriteriaQuery<Gestionnaire> cq = cb.createQuery(Gestionnaire.class);
-		Root<Gestionnaire> model = cq.from(Gestionnaire.class);
-		cq.where(cb.equal(model.get("id"), id));
-		TypedQuery<Gestionnaire> q = em.createQuery(cq);
-		return q.getSingleResult();
+		return em.find(Gestionnaire.class, id);
 	}
 
 	@Override
@@ -42,20 +36,19 @@ public class GestionnaireDaoImpl implements GestionnaireDao {
 
 	@Override
 	public Gestionnaire save(Gestionnaire entity) {
-		// TODO Auto-generated method stub
-		return null;
+		em.persist(entity);
+		return entity;
 	}
 
 	@Override
 	public void delete(Gestionnaire entity) {
-		// TODO Auto-generated method stub
-
+		entity = em.merge(entity);
+		em.remove(entity);
 	}
 
 	@Override
 	public Gestionnaire update(Gestionnaire entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.merge(entity);
 	}
 
 }

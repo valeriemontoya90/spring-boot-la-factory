@@ -14,15 +14,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.monapp.dao.FormateurDao;
 import com.monapp.entity.Formateur;
-import com.monapp.entity.Views;
 
 @RestController
 @CrossOrigin
 public class FormateurController {
-	
+
 	@Autowired
 	FormateurDao formateurDao;
 
@@ -56,7 +54,6 @@ public class FormateurController {
 
 	@CrossOrigin
 	@PutMapping("/formateurs")
-	@JsonView(Views.FormateurWithAll.class)
 	public ResponseEntity<Formateur> update(@RequestBody Formateur formateur) {
 		if (formateur.getId() == 0) {
 			return create(formateur);

@@ -14,10 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonView;
 import com.monapp.dao.CompetenceDao;
 import com.monapp.entity.Competence;
-import com.monapp.entity.Views;
 
 @RestController
 @CrossOrigin
@@ -26,7 +24,6 @@ public class CompetenceController {
 	CompetenceDao competenceDao;
 
 	@GetMapping("/competences/{id}")
-	@JsonView(Views.CompetenceWithAll.class)
 	public ResponseEntity<Competence> findOne(@PathVariable("id") Integer id) {
 		Competence competence = competenceDao.findByPrimaryKey(id);
 		if (competence == null) {
@@ -37,7 +34,6 @@ public class CompetenceController {
 	}
 
 	@GetMapping("/competences")
-	@JsonView(Views.CompetenceWithAll.class)
 	public ResponseEntity<List<Competence>> findAll() {
 		List<Competence> competences = competenceDao.findAll();
 		return new ResponseEntity<List<Competence>>(competences, HttpStatus.OK);
@@ -54,7 +50,6 @@ public class CompetenceController {
 	}
 
 	@PostMapping("/competences")
-	@JsonView(Views.CompetenceWithAll.class)
 	public ResponseEntity<Competence> create(@RequestBody Competence competence) {
 		if (competence.getId() > 0) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -64,7 +59,6 @@ public class CompetenceController {
 	}
 
 	@PutMapping("/competences")
-	@JsonView(Views.CompetenceWithAll.class)
 	public ResponseEntity<Competence> update(@RequestBody Competence competence) {
 		if (competence.getId() == 0) {
 			return create(competence);

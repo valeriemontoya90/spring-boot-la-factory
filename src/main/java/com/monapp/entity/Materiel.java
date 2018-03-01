@@ -29,13 +29,13 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING, name = "type_materiel")
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
-@JsonSubTypes({
-    @JsonSubTypes.Type(value = Salle.class, name = "Salle"),
-    @JsonSubTypes.Type(value = VideoProjecteur.class, name = "VideoProjecteur"),
-    @JsonSubTypes.Type(value = Ordinateur.class, name = "Ordinateur") }
-)
+//@JsonIgnoreProperties(ignoreUnknown = true)
+//@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
+//@JsonSubTypes({
+//    @JsonSubTypes.Type(value = Salle.class, name = "Salle"),
+//    @JsonSubTypes.Type(value = VideoProjecteur.class, name = "VideoProjecteur"),
+//    @JsonSubTypes.Type(value = Ordinateur.class, name = "Ordinateur") }
+//)
 
 
 public abstract class Materiel {

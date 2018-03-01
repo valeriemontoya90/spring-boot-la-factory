@@ -23,8 +23,7 @@ public class OrinateurDaoImpl implements OrdinateurDao {
 
 	@Override
 	public Ordinateur findByPrimaryKey(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.find(Ordinateur.class, id);
 	}
 
 	@Override
@@ -48,14 +47,13 @@ public class OrinateurDaoImpl implements OrdinateurDao {
 
 	@Override
 	public void delete(Ordinateur entity) {
-		// TODO Auto-generated method stub
-		
+		entity = em.merge(entity);
+		em.remove(entity);
 	}
 
 	@Override
 	public Ordinateur update(Ordinateur entity) {
-		// TODO Auto-generated method stub
-		return null;
+		return em.merge(entity);
 	}
 
 

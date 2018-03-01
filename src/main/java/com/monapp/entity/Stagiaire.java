@@ -1,6 +1,5 @@
 package com.monapp.entity;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,15 +13,13 @@ import com.fasterxml.jackson.annotation.JsonView;
 @Table(name = "stagiaire")
 @DiscriminatorValue("stagiaire")
 public class Stagiaire extends RH {
-
-	@Column
-	@JsonView(Views.StagiaireWithFormation.class)
-	@ManyToOne(fetch = FetchType.EAGER)
+	
+	@ManyToOne(fetch=FetchType.EAGER)
+	@JsonView(Views.StagiaireWithCursusDeFormation.class)
 	private CursusDeFormation cursusDeFormation;
 
-	@Column
-	@JsonView(Views.StagiaireWithOrdinateur.class)
 	@OneToOne(fetch = FetchType.EAGER)
+	@JsonView(Views.StagiaireWithOrdinateur.class)
 	private Ordinateur ordinateur;
 
 	public Stagiaire() {

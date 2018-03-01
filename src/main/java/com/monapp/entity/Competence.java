@@ -3,7 +3,6 @@ package com.monapp.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -27,19 +26,16 @@ public class Competence {
 	@JsonView(Views.Common.class)
 	private int id;
 
-	@Column
-	@ManyToOne
-	@JsonView(Views.CompetenceWithMatiere.class)
-	private Matiere matiere;
-
-	@Column
 	@Enumerated(EnumType.STRING)
 	@JsonView(Views.CompetenceWithLevel.class)
 	private Level level;
 
-	@Column
+	@ManyToOne
+	@JsonView(Views.CompetenceWithMatiere.class)
+	private Matiere matiere;
+
 	@JsonView(Views.CompetenceWithFormateur.class)
-	@ManyToMany(mappedBy = "competences", fetch = FetchType.EAGER)
+	@ManyToMany(mappedBy = "competences", fetch = FetchType.LAZY)
 	private List<Formateur> formateurs = new ArrayList<>();
 
 	public Competence() {

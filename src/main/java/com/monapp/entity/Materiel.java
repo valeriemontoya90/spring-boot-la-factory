@@ -14,8 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Version;
 
@@ -38,11 +38,9 @@ public abstract class Materiel {
 	@Column
 	private Boolean isDisponible;
 
-	@Column
-	@OneToMany(mappedBy = "materiel", fetch = FetchType.EAGER)
-	private List<MatiereMateriel> matiereMateriels = new ArrayList<>();
+	@ManyToMany(mappedBy = "listeDuMateriel", fetch = FetchType.EAGER)
+	private List<Matiere> matieres = new ArrayList<>();
 
-	@Column
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Technicien technicien;
 
@@ -104,20 +102,20 @@ public abstract class Materiel {
 		this.type = type;
 	}
 
-	public List<MatiereMateriel> getMatiereMateriels() {
-		return matiereMateriels;
-	}
-
-	public void setMatiereMateriels(List<MatiereMateriel> matiereMateriels) {
-		this.matiereMateriels = matiereMateriels;
-	}
-
 	public Technicien getTechnicien() {
 		return technicien;
 	}
 
 	public void setTechnicien(Technicien technicien) {
 		this.technicien = technicien;
+	}
+
+	public List<Matiere> getMatieres() {
+		return matieres;
+	}
+
+	public void setMatieres(List<Matiere> matieres) {
+		this.matieres = matieres;
 	}
 
 }

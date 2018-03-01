@@ -2,7 +2,6 @@ package com.monapp.entity;
 
 import java.util.Date;
 
-import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -22,7 +21,7 @@ public class Ordinateur extends Materiel {
 
 	@Temporal(TemporalType.DATE)
 	private Date anneeAchat;
-	@Column
+	
 	@OneToOne(mappedBy = "ordinateur", fetch = FetchType.EAGER)
 	private Stagiaire stagiaire;
 

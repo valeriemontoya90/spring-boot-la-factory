@@ -25,7 +25,7 @@ public class DisponibiliteDaoImpl implements DisponibiliteDao {
 
 	@Override
 	public List<Disponibilite> findAll() {
-		String querystring = "SELECT a FROM Auteur a";
+		String querystring = "SELECT a FROM Disponibilite a";
 		Query query = em.createQuery(querystring);
 		List<Disponibilite> list = query.getResultList();
 		return list;

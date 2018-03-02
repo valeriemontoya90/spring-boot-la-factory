@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -28,15 +29,14 @@ public class CursusDeFormation {
 	private String titre;
 
 	@OneToMany(mappedBy = "cursusDeFormation", fetch = FetchType.LAZY)
-	@JsonView(Views.CursusDeFormationWithStagiaire.class)
+	@JsonIgnore
 	private List<Stagiaire> stagiaires = new ArrayList<>();
 
 	@OneToMany(mappedBy = "cursusDeFormation", fetch = FetchType.LAZY)
-	@JsonView(Views.CursusDeFormationWithFormation.class)
+	@JsonIgnore
 	private List<Formation> formations = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonView(Views.CursusDeFormationWithGestionnaire.class)
 	private Gestionnaire gestionnaire;
 
 }

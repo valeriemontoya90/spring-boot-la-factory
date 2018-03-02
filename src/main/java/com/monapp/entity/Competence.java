@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -34,8 +35,8 @@ public class Competence {
 	@JsonView(Views.CompetenceWithMatiere.class)
 	private Matiere matiere;
 
-	@JsonView(Views.CompetenceWithFormateur.class)
 	@ManyToMany(mappedBy = "competences", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<Formateur> formateurs = new ArrayList<>();
 
 	public Competence() {

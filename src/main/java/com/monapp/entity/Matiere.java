@@ -3,20 +3,18 @@ package com.monapp.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -32,7 +30,7 @@ public class Matiere {
 	private String titre;
 
 	@Column
-	private int duree;
+	private int duree; //jours
 
 	@Column
 	private String objectif;
@@ -44,11 +42,11 @@ public class Matiere {
 	private String contenu;
 
 	@OneToMany(mappedBy = "matiere", fetch = FetchType.LAZY)
-	@JsonView(Views.MatiereWithCompetence.class)
+	@JsonIgnore
 	private List<Competence> competences = new ArrayList<>();
 
 	@OneToOne(mappedBy = "matiere", fetch = FetchType.EAGER)
-	@JsonView(Views.MatiereWithFormation.class)
+	@JsonIgnore
 	private Formation formation;
 
 	@ManyToMany(fetch = FetchType.EAGER)

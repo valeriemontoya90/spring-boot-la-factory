@@ -10,6 +10,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "ordinateur")
 @DiscriminatorValue("ordinateur")
@@ -23,6 +25,7 @@ public class Ordinateur extends Materiel {
 	private Date anneeAchat;
 	
 	@OneToOne(mappedBy = "ordinateur", fetch = FetchType.EAGER)
+	@JsonIgnore
 	private Stagiaire stagiaire;
 
 	public Ordinateur() {

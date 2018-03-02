@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -19,7 +20,7 @@ public class Technicien extends RH {
 
 	@Column
 	@OneToMany(mappedBy = "technicien", fetch = FetchType.EAGER)
-	@JsonView(Views.TechnicienWithMateriel.class)
+	@JsonIgnore
 	private List<Materiel> matos = new ArrayList<>();
 
 	public Technicien() {

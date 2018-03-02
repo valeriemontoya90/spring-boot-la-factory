@@ -10,6 +10,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -26,7 +27,7 @@ public class Formateur extends RH {
 	private List<Competence> competences = new ArrayList<>();
 
 	@OneToMany(mappedBy = "formateur", fetch = FetchType.EAGER)
-	@JsonView(Views.FormateurWithFormation.class)
+	@JsonIgnore
 	private List<Formation> formations = new ArrayList<>();
 
 	public Formateur() {

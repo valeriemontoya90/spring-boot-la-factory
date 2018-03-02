@@ -1,23 +1,27 @@
 package com.monapp.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "formation")
 public class Formation {
-	
+
 	@Id
 	@GeneratedValue(generator = "formation_seq")
 	@SequenceGenerator(name = "formation_seq", sequenceName = "formation_seq", allocationSize = 1)
@@ -28,10 +32,11 @@ public class Formation {
 
 	@Column
 	private Date dateFin;
-	
-	@ManyToOne(fetch = FetchType.EAGER)
-	private CursusDeFormation cursusDeFormation;
-	
+
+	@ManyToMany(mappedBy="formations", fetch=FetchType.LAZY)
+	@JsonIgnore
+	private List<CursusDeFormation> cursusDeFormations = new ArrayList<>();
+
 	@OneToOne(fetch = FetchType.EAGER)
 	@JsonView(Views.FormationWithMatiere.class)
 	private Matiere matiere;
@@ -44,12 +49,13 @@ public class Formation {
 		super();
 	}
 	
-	public Formation(Date dateDebut, Date dateFin, CursusDeFormation cursusDeFormation, Matiere matiere,
+	public Formation(int id, Date dateDebut, Date dateFin, List<CursusDeFormation> cursusDeFormations, Matiere matiere,
 			Formateur formateur) {
 		super();
+		this.id = id;
 		this.dateDebut = dateDebut;
 		this.dateFin = dateFin;
-		this.cursusDeFormation = cursusDeFormation;
+		this.cursusDeFormations = cursusDeFormations;
 		this.matiere = matiere;
 		this.formateur = formateur;
 	}
@@ -78,12 +84,12 @@ public class Formation {
 		this.dateFin = dateFin;
 	}
 
-	public CursusDeFormation getCursusDeFormation() {
-		return cursusDeFormation;
+	public List<CursusDeFormation> getCursusDeFormations() {
+		return cursusDeFormations;
 	}
 
-	public void setCursusDeFormation(CursusDeFormation cursusDeFormation) {
-		this.cursusDeFormation = cursusDeFormation;
+	public void setCursusDeFormations(List<CursusDeFormation> cursusDeFormations) {
+		this.cursusDeFormations = cursusDeFormations;
 	}
 
 	public Matiere getMatiere() {
@@ -100,6 +106,12 @@ public class Formation {
 
 	public void setFormateur(Formateur formateur) {
 		this.formateur = formateur;
+	}
+
+	@Override
+	public String toString() {
+		return "Formation [id=" + id + ", dateDebut=" + dateDebut + ", dateFin=" + dateFin + ", cursusDeFormations="
+				+ cursusDeFormations + ", matiere=" + matiere + ", formateur=" + formateur + "]";
 	}
 
 }

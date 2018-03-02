@@ -21,7 +21,7 @@ public interface Views {
 	
 	public interface CursusDeFormation extends Common{}
 	public interface CursusDeFormationWithStagiaire extends CursusDeFormation{}
-	public interface CursusDeFormationWithFormation extends CursusDeFormation{}
+	public interface CursusDeFormationWithFormations extends CursusDeFormation{}
 	public interface CursusDeFormationWithGestionnaire extends CursusDeFormation{}
 	
 	public interface Stagiaire extends Common{}

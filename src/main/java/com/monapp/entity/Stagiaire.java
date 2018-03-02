@@ -1,22 +1,26 @@
 package com.monapp.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "stagiaire")
 @DiscriminatorValue("stagiaire")
 public class Stagiaire extends RH {
-	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JsonView(Views.StagiaireWithCursusDeFormation.class)
-	private CursusDeFormation cursusDeFormation;
+
+	@ManyToMany(mappedBy = "stagiaires", fetch = FetchType.LAZY)
+	@JsonIgnore
+	private List<CursusDeFormation> cursusDeFormations = new ArrayList<>();
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JsonView(Views.StagiaireWithOrdinateur.class)
@@ -26,18 +30,18 @@ public class Stagiaire extends RH {
 		super();
 	}
 
-	public Stagiaire(CursusDeFormation cursusDeFormation, Ordinateur ordinateur) {
+	public Stagiaire(List<CursusDeFormation> cursusDeFormations, Ordinateur ordinateur) {
 		super();
-		this.cursusDeFormation = cursusDeFormation;
+		this.cursusDeFormations = cursusDeFormations;
 		this.ordinateur = ordinateur;
 	}
-
-	public CursusDeFormation getCursusDeFormation() {
-		return cursusDeFormation;
+	
+	public List<CursusDeFormation> getCursusDeFormations() {
+		return cursusDeFormations;
 	}
 
-	public void setCursusDeformation(CursusDeFormation cursusDeFormation) {
-		this.cursusDeFormation = cursusDeFormation;
+	public void setCursusDeFormations(List<CursusDeFormation> cursusDeFormations) {
+		this.cursusDeFormations = cursusDeFormations;
 	}
 
 	public Ordinateur getOrdinateur() {
@@ -50,9 +54,6 @@ public class Stagiaire extends RH {
 
 	@Override
 	public String toString() {
-		return "Stagiaire [cursusDeFormation=" + cursusDeFormation + ", ordinateur=" + ordinateur + "]";
+		return "Stagiaire [cursusDeFormations=" + cursusDeFormations + ", ordinateur=" + ordinateur + "]";
 	}
-
-
-
 }

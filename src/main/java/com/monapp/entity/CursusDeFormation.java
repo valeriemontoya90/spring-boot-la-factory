@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
@@ -28,15 +29,55 @@ public class CursusDeFormation {
 	@Column
 	private String titre;
 
-	@OneToMany(mappedBy = "cursusDeFormation", fetch = FetchType.LAZY)
-	@JsonIgnore
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JsonView(Views.CursusDeFormationWithStagiaire.class)
 	private List<Stagiaire> stagiaires = new ArrayList<>();
 
-	@OneToMany(mappedBy = "cursusDeFormation", fetch = FetchType.LAZY)
-	@JsonIgnore
+	@ManyToMany(fetch=FetchType.LAZY)
+	@JsonView(Views.CursusDeFormationWithFormations.class)
 	private List<Formation> formations = new ArrayList<>();
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonView(Views.CursusDeFormationWithGestionnaire.class)
 	private Gestionnaire gestionnaire;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTitre() {
+		return titre;
+	}
+
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
+
+	public List<Stagiaire> getStagiaires() {
+		return stagiaires;
+	}
+
+	public void setStagiaires(List<Stagiaire> stagiaires) {
+		this.stagiaires = stagiaires;
+	}
+
+	public List<Formation> getFormations() {
+		return formations;
+	}
+
+	public void setFormations(List<Formation> formations) {
+		this.formations = formations;
+	}
+
+	public Gestionnaire getGestionnaire() {
+		return gestionnaire;
+	}
+
+	public void setGestionnaire(Gestionnaire gestionnaire) {
+		this.gestionnaire = gestionnaire;
+	}
 }

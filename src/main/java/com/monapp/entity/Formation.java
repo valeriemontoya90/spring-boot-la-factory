@@ -53,6 +53,14 @@ public class Formation {
 		this.matiere = matiere;
 		this.formateur = formateur;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 	
 	public Date getDateDebut() {
 		return dateDebut;

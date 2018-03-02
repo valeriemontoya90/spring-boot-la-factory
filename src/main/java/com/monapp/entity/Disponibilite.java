@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -35,8 +36,8 @@ public class Disponibilite {
 	private Date dateFin;
 	
 	@ManyToMany(mappedBy = "disponibilites", fetch = FetchType.LAZY)
-	@JsonView(Views.DisponibiliteWithFormateur.class)
-	private List<Formateur> formateurs = new ArrayList<>();
+	@JsonIgnore
+	private List<Formateur> formateurs = new ArrayList<>();	
 
 	public Disponibilite() {
 		super();

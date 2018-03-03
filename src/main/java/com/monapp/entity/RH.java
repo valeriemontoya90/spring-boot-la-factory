@@ -26,9 +26,6 @@ public class RH {
 	private String adresse;
 	private String codePostal;
 	private String mail;
-	
-	@Version
-	private int version;
 
 	public RH() {
 		super();

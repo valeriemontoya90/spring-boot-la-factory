@@ -144,7 +144,7 @@ public class Matiere {
 	@Override
 	public String toString() {
 		return "Matiere [id=" + id + ", titre=" + titre + ", duree=" + duree + ", objectif=" + objectif + ", prerequis="
-				+ prerequis + ", contenu=" + contenu + ", competences=" + competences + "]";
+				+ prerequis + ", contenu=" + contenu + "]";
 	}
 
 }

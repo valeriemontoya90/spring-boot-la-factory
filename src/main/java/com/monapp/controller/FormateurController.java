@@ -32,6 +32,13 @@ public class FormateurController {
 	}
 
 	@CrossOrigin
+	@GetMapping("/formateurs/matiere/{id}")
+	public ResponseEntity<List<Formateur>> findAllByMatiereId(@PathVariable("id") Integer id) {
+		List<Formateur> formateurs = formateurDao.findAllByMatiereId(id);
+		return new ResponseEntity<List<Formateur>>(formateurs, HttpStatus.OK);
+	}
+
+	@CrossOrigin
 	@GetMapping("/formateurs/{id}")
 	public ResponseEntity<Formateur> findOne(@PathVariable("id") Integer id) {
 		Formateur formateur = formateurDao.findByPrimaryKey(id);

@@ -22,11 +22,12 @@ public class Formateur extends RH {
 	@JsonView(Views.FormateurWithDisponibilite.class)
 	private List<Disponibilite> disponibilites = new ArrayList<>();
 
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JsonView(Views.FormateurWithCompetence.class)
+	@OneToMany(mappedBy = "formateur", fetch = FetchType.LAZY)
+	//@JsonView(Views.FormateurWithCompetence.class)
+	@JsonIgnore
 	private List<Competence> competences = new ArrayList<>();
 
-	@OneToMany(mappedBy = "formateur", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "formateur", fetch = FetchType.LAZY)
 	@JsonIgnore
 	private List<Formation> formations = new ArrayList<>();
 
@@ -67,8 +68,7 @@ public class Formateur extends RH {
 
 	@Override
 	public String toString() {
-		return "Formateur [disponibilites=" + disponibilites + ", competences=" + competences + ", formations="
-				+ formations + "]";
+		return "Formateur [disponibilites=" + disponibilites +"]";
 	}
 
 }

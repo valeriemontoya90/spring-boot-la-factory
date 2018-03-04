@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -33,6 +34,18 @@ public class FormateurDaoImpl implements FormateurDao {
 		Root<Formateur> r = crit.from(Formateur.class);
 		crit.select(r);
 		return em.createQuery(crit).getResultList();
+	}
+
+	@Override
+	public List<Formateur> findAllByMatiereId(Integer matiereId) {
+		String querystring = "SELECT F.id, F.nom, F.prenom, F.adresse, F.codePostal, F.mail FROM RH F "
+				+ "WHERE F.id IN "
+				+ "(SELECT C.formateur.id "
+				+ "FROM Competence C "
+				+ "WHERE C.matiere.id = "+matiereId+")";
+		Query query = em.createQuery(querystring);
+		List<Formateur> liste = query.getResultList();
+		return liste;
 	}
 
 	@Override

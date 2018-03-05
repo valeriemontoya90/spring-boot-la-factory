@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.monapp.dao.CompetenceDao;
 import com.monapp.entity.Competence;
+import com.monapp.entity.Formateur;
 
 @Repository
 @Transactional
@@ -27,6 +28,15 @@ public class CompetenceDaoImpl implements CompetenceDao {
 	@Override
 	public List<Competence> findAll() {
 		String querystring = "SELECT c FROM Competence c ";
+		Query query = em.createQuery(querystring);
+		List<Competence> list = query.getResultList();
+		return list;
+	}
+
+	@Override
+	public List<Competence> findAllByFormateurId(Integer formateurId) {
+		String querystring = "SELECT C.id, C.level, C.matiere, C.formateur FROM Competence C "
+				+ "WHERE C.formateur.id = "+formateurId+")";
 		Query query = em.createQuery(querystring);
 		List<Competence> list = query.getResultList();
 		return list;

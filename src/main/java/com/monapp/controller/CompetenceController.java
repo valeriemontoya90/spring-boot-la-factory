@@ -20,9 +20,11 @@ import com.monapp.entity.Competence;
 @RestController
 @CrossOrigin
 public class CompetenceController {
+	
 	@Autowired
 	CompetenceDao competenceDao;
 
+	@CrossOrigin
 	@GetMapping("/competences/{id}")
 	public ResponseEntity<Competence> findOne(@PathVariable("id") Integer id) {
 		Competence competence = competenceDao.findByPrimaryKey(id);
@@ -33,12 +35,21 @@ public class CompetenceController {
 		}
 	}
 
+	@CrossOrigin
+	@GetMapping("/competences/formateur/{id}")
+	public ResponseEntity<List<Competence>> findAllByFormateurId(@PathVariable("id") Integer id) {
+		List<Competence> competences = competenceDao.findAllByFormateurId(id);
+		return new ResponseEntity<List<Competence>>(competences, HttpStatus.OK);
+	}
+
+	@CrossOrigin
 	@GetMapping("/competences")
 	public ResponseEntity<List<Competence>> findAll() {
 		List<Competence> competences = competenceDao.findAll();
 		return new ResponseEntity<List<Competence>>(competences, HttpStatus.OK);
 	}
 
+	@CrossOrigin
 	@DeleteMapping("/competences/{id}")
 	public ResponseEntity<Competence> delete(@PathVariable("id") Integer id) {
 		Competence liv = competenceDao.findByPrimaryKey(id);
@@ -49,6 +60,7 @@ public class CompetenceController {
 		}
 	}
 
+	@CrossOrigin
 	@PostMapping("/competences")
 	public ResponseEntity<Competence> create(@RequestBody Competence competence) {
 		if (competence.getId() > 0) {
@@ -58,6 +70,7 @@ public class CompetenceController {
 		return new ResponseEntity<Competence>(competence, HttpStatus.CREATED);
 	}
 
+	@CrossOrigin
 	@PutMapping("/competences")
 	public ResponseEntity<Competence> update(@RequestBody Competence competence) {
 		if (competence.getId() == 0) {

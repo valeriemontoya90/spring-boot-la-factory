@@ -11,11 +11,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
@@ -42,8 +44,8 @@ public class CursusDeFormation {
 	@JsonView(Views.CursusDeFormationWithStagiaire.class)
 	private List<Stagiaire> stagiaires = new ArrayList<>();
 
-	@ManyToMany(fetch=FetchType.LAZY)
-	@JsonView(Views.CursusDeFormationWithFormations.class)
+	@OneToMany(mappedBy="cursusDeFormation", fetch=FetchType.LAZY)
+	@JsonIgnore
 	private List<Formation> formations = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.LAZY)

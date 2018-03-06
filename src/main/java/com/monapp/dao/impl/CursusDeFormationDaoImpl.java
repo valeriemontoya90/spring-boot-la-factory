@@ -11,9 +11,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
-import com.monapp.dao.CompetenceDao;
 import com.monapp.dao.CursusDeFormationDao;
-import com.monapp.entity.Competence;
 import com.monapp.entity.CursusDeFormation;
 
 @Repository

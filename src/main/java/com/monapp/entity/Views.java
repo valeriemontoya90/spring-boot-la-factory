@@ -1,5 +1,7 @@
 package com.monapp.entity;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
 public interface Views {
 	public interface Common{}
 	
@@ -12,6 +14,7 @@ public interface Views {
 	public interface Formation extends Common{}
 	public interface FormationWithFormateur extends Common{}
 	public interface FormationWithMatiere extends Common{}
+	public interface FormationWithCursusDeFormation extends Common{}
 	
 	public interface Gestionnaire extends Common{}
 	public interface GestionnaireWithCursusDeFormation extends Gestionnaire{}

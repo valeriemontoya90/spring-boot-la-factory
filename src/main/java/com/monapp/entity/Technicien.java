@@ -11,14 +11,12 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonView;
 
 @Entity
 @Table(name = "technicien")
 @DiscriminatorValue("technicien")
 public class Technicien extends RH {
 
-	@Column
 	@OneToMany(mappedBy = "technicien", fetch = FetchType.EAGER)
 	@JsonIgnore
 	private List<Materiel> matos = new ArrayList<>();

@@ -9,4 +9,17 @@ import javax.persistence.Table;
 @DiscriminatorValue("videoProjecteur")
 public class VideoProjecteur extends Materiel {
 
+	private String typez;
+	
+	public VideoProjecteur() {
+		super();
+		this.setType(TypeMateriel.VIDEOPROJECTEUR);
+	}
+
+	public VideoProjecteur(String typez) {
+		super();
+		this.setType(TypeMateriel.VIDEOPROJECTEUR);
+		this.typez = typez;
+	}
+
 }

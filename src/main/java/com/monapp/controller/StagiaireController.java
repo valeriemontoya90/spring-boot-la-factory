@@ -20,8 +20,10 @@ import com.monapp.entity.Stagiaire;
 @RestController
 @CrossOrigin
 public class StagiaireController {
+	
 	@Autowired
 	StagiaireDao stagiaireDao;
+	
 	@CrossOrigin
 	@GetMapping("/stagiaires/{id}")
 	public ResponseEntity<Stagiaire> findOne(@PathVariable("id") Integer id) {
@@ -32,12 +34,14 @@ public class StagiaireController {
 			return new ResponseEntity<Stagiaire>(stagiaire, HttpStatus.OK);
 		}
 	}
+	
 	@CrossOrigin
 	@GetMapping("/stagiaires")
 	public ResponseEntity<List<Stagiaire>> findAll() {
 		List<Stagiaire> stagiaires = stagiaireDao.findAll();
 		return new ResponseEntity<List<Stagiaire>>(stagiaires, HttpStatus.OK);
 	}
+	
 	@CrossOrigin
 	@PostMapping("/stagiaires")
 	public ResponseEntity<Stagiaire> create(@RequestBody Stagiaire stagiaire) {
@@ -47,6 +51,7 @@ public class StagiaireController {
 		stagiaireDao.save(stagiaire);
 		return new ResponseEntity<Stagiaire>(stagiaire, HttpStatus.CREATED);
 	}
+	
 	@CrossOrigin
 	@PutMapping("/stagiaires")
 	public ResponseEntity<Stagiaire> update(@RequestBody Stagiaire stagiaire) {
@@ -56,6 +61,7 @@ public class StagiaireController {
 		stagiaire = stagiaireDao.update(stagiaire);
 		return new ResponseEntity<Stagiaire>(stagiaire, HttpStatus.OK);
 	}
+	
 	@CrossOrigin
 	@DeleteMapping("/stagiaires/{id}")
 	public ResponseEntity<Stagiaire> delete(@PathVariable("id") Integer id) {

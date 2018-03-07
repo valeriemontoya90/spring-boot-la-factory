@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -12,6 +13,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.monapp.dao.OrdinateurDao;
+import com.monapp.entity.Materiel;
 import com.monapp.entity.Ordinateur;
 
 @Transactional
@@ -31,9 +33,9 @@ public class OrdinateurDaoImpl implements OrdinateurDao {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Ordinateur> crit = cb.createQuery(Ordinateur.class);
 		Root<Ordinateur> r = crit.from(Ordinateur.class);
-		
+
 		crit.select(r);
-		
+
 		return em.createQuery(crit).getResultList();
 	}
 

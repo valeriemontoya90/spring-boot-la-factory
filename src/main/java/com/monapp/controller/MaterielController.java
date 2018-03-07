@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.monapp.dao.MaterielDao;
+import com.monapp.entity.Competence;
 import com.monapp.entity.Materiel;
 
 @CrossOrigin
@@ -30,7 +31,7 @@ public class MaterielController {
 		List<Materiel> materiel = materielDao.findAll();
 		return new ResponseEntity<List<Materiel>>(materiel, HttpStatus.OK);
 	}
-	
+
 	@CrossOrigin
 	@GetMapping("/materiels/{id}")
 	public ResponseEntity<Materiel> findOne(@PathVariable("id") Integer id) {
@@ -42,7 +43,14 @@ public class MaterielController {
 			return new ResponseEntity<Materiel>(materiel, HttpStatus.OK);
 		}
 	}
-	
+
+	@CrossOrigin
+	@GetMapping("/materiels/technicien/{id}")
+	public ResponseEntity<List<Materiel>> findAllByTechnicienId(@PathVariable("id") Integer id) {
+		List<Materiel> materiels = materielDao.findAllByTechnicienId(id);
+		return new ResponseEntity<List<Materiel>>(materiels, HttpStatus.OK);
+	}
+
 	@CrossOrigin
 	@PostMapping("/materiels")
 	public ResponseEntity<Materiel> create(@RequestBody Materiel materiel) {
@@ -66,14 +74,14 @@ public class MaterielController {
 
 	@CrossOrigin
 	@DeleteMapping("/materiels/{id}")
-	public ResponseEntity<Materiel> delete(@PathVariable("id") Integer id){
+	public ResponseEntity<Materiel> delete(@PathVariable("id") Integer id) {
 		Materiel tmp = materielDao.findByPrimaryKey(id);
 		if (tmp == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			materielDao.delete(tmp);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}	
-	}	
+		}
+	}
 
 }

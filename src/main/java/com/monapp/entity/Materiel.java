@@ -47,6 +47,7 @@ public class Materiel {
 	private List<Matiere> matieres = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonView(Views.MaterielWithTechnicien.class)
 	private Technicien technicien;
 
 	@Enumerated(EnumType.STRING)

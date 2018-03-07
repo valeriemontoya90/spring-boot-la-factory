@@ -30,10 +30,12 @@ public class Ordinateur extends Materiel {
 
 	public Ordinateur() {
 		super();
+		this.setType(TypeMateriel.ORDINATEUR);
 	}
 
 	public Ordinateur(Processeur processeur, Integer ram, Integer disqueDur, Date anneeAchat, Stagiaire stagiaire) {
 		super();
+		this.setType(TypeMateriel.ORDINATEUR);
 		this.processeur = processeur;
 		this.ram = ram;
 		this.disqueDur = disqueDur;
@@ -84,7 +86,7 @@ public class Ordinateur extends Materiel {
 	@Override
 	public String toString() {
 		return "Ordinateur [processeur=" + processeur + ", ram=" + ram + ", disqueDur=" + disqueDur + ", anneeAchat="
-				+ anneeAchat + ", stagiaire=" + stagiaire + "]";
+				+ anneeAchat +"]";
 	}
 
 }

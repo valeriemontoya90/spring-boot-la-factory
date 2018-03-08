@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Repository;
 import com.monapp.dao.OrdinateurDao;
 import com.monapp.entity.Materiel;
 import com.monapp.entity.Ordinateur;
+import com.monapp.entity.Stagiaire;
 
 @Transactional
 @Repository
@@ -52,6 +52,8 @@ public class OrdinateurDaoImpl implements OrdinateurDao {
 
 	@Override
 	public void delete(Ordinateur entity) {
+		Stagiaire stagiaire = entity.getStagiaire(); 
+		stagiaire.setOrdinateur(null); 
 		entity = em.merge(entity);
 		em.remove(entity);
 	}

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.monapp.dao.OrdinateurDao;
 import com.monapp.dao.StagiaireDao;
+import com.monapp.entity.Ordinateur;
 import com.monapp.entity.Stagiaire;
 
 @RestController
@@ -23,6 +25,9 @@ public class StagiaireController {
 	
 	@Autowired
 	StagiaireDao stagiaireDao;
+
+	@Autowired
+	OrdinateurDao ordinateurDao;
 	
 	@CrossOrigin
 	@GetMapping("/stagiaires/{id}")
@@ -49,6 +54,11 @@ public class StagiaireController {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}
 		stagiaireDao.save(stagiaire);
+		if(stagiaire.getOrdinateur() != null) {
+			Ordinateur ordinateurFound = ordinateurDao.findByPrimaryKey(stagiaire.getOrdinateur().getId());
+			ordinateurFound.setIsDisponible(false);
+			ordinateurDao.update(ordinateurFound);
+		}
 		return new ResponseEntity<Stagiaire>(stagiaire, HttpStatus.CREATED);
 	}
 	

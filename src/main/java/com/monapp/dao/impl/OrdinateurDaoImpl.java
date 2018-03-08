@@ -53,7 +53,9 @@ public class OrdinateurDaoImpl implements OrdinateurDao {
 	@Override
 	public void delete(Ordinateur entity) {
 		Stagiaire stagiaire = entity.getStagiaire(); 
-		stagiaire.setOrdinateur(null); 
+		if(stagiaire != null) {
+			stagiaire.setOrdinateur(null); 
+		}
 		entity = em.merge(entity);
 		em.remove(entity);
 	}

@@ -83,7 +83,7 @@ public class StagiaireController {
 				Ordinateur ordinateurFound = ordinateurDao.findByPrimaryKey(tmp.getOrdinateur().getId());
 				ordinateurFound.setIsDisponible(true);
 				ordinateurDao.update(ordinateurFound);
-				tmp.setOrdinateur(null);
+				//tmp.setOrdinateur(null);
 			}
 			stagiaireDao.delete(tmp);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);

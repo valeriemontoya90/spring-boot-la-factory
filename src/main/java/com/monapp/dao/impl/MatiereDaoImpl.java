@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.monapp.dao.MatiereDao;
+import com.monapp.entity.Competence;
 import com.monapp.entity.Matiere;
 
 @Transactional
@@ -45,6 +46,12 @@ public class MatiereDaoImpl implements MatiereDao {
 
     @Override
     public void delete(Matiere entity) {
+		List<Competence> competences = entity.getCompetences(); 
+		for(Competence c : competences) 
+		{ 
+			//c.setFormateur(null);
+			em.remove(c);
+		} 
         entity = em.merge(entity);
         em.remove(entity);
     }

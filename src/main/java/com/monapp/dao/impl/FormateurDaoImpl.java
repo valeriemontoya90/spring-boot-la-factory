@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.monapp.dao.FormateurDao;
+import com.monapp.entity.Competence;
 import com.monapp.entity.Formateur;
 
 @Transactional
@@ -61,6 +62,11 @@ public class FormateurDaoImpl implements FormateurDao {
 
 	@Override
 	public void delete(Formateur entity) {
+		List<Competence> competences = entity.getCompetences(); 
+		for(Competence c : competences) 
+		{ 
+			c.setFormateur(null); 
+		} 
 		entity = em.merge(entity);
 		em.remove(entity);
 	}

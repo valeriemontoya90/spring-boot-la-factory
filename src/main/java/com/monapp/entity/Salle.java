@@ -13,10 +13,12 @@ public class Salle extends Materiel {
 
 	public Salle() {
 		super();
+		this.setType(TypeMateriel.SALLE);
 	}
 
 	public Salle(Integer capacite) {
 		super();
+		this.setType(TypeMateriel.SALLE);
 		this.capacite = capacite;
 	}
 

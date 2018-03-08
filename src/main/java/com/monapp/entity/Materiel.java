@@ -47,13 +47,11 @@ public class Materiel {
 	private List<Matiere> matieres = new ArrayList<>();
 
 	@ManyToOne(fetch = FetchType.EAGER)
+	@JsonView(Views.MaterielWithTechnicien.class)
 	private Technicien technicien;
 
 	@Enumerated(EnumType.STRING)
 	private TypeMateriel type;
-
-	@Version
-	private int version;
 
 	public Materiel() {
 		super();
@@ -89,14 +87,6 @@ public class Materiel {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getVersion() {
-		return version;
-	}
-
-	public void setVersion(int version) {
-		this.version = version;
 	}
 
 	public TypeMateriel getType() {

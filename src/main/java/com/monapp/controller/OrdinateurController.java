@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.monapp.dao.OrdinateurDao;
+import com.monapp.entity.Materiel;
 import com.monapp.entity.Ordinateur;
 
 @CrossOrigin
@@ -30,7 +31,7 @@ public class OrdinateurController {
 		List<Ordinateur> ordinateurs = ordinateurDao.findAll();
 		return new ResponseEntity<List<Ordinateur>>(ordinateurs, HttpStatus.OK);
 	}
-	
+
 	@CrossOrigin
 	@GetMapping("/ordinateurs/{id}")
 	public ResponseEntity<Ordinateur> findOne(@PathVariable("id") Integer id) {
@@ -42,7 +43,7 @@ public class OrdinateurController {
 			return new ResponseEntity<Ordinateur>(ordinateur, HttpStatus.OK);
 		}
 	}
-	
+
 	@CrossOrigin
 	@PostMapping("/ordinateurs")
 	public ResponseEntity<Ordinateur> create(@RequestBody Ordinateur ordinateur) {
@@ -65,14 +66,14 @@ public class OrdinateurController {
 
 	@CrossOrigin
 	@DeleteMapping("/ordinateurs/{id}")
-	public ResponseEntity<Ordinateur> delete(@PathVariable("id") Integer id){
+	public ResponseEntity<Ordinateur> delete(@PathVariable("id") Integer id) {
 		Ordinateur tmp = ordinateurDao.findByPrimaryKey(id);
 		if (tmp == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			ordinateurDao.delete(tmp);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}	
-	}	
+		}
+	}
 
 }

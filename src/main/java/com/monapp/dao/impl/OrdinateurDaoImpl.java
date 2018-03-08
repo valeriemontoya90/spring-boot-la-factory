@@ -12,7 +12,9 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.monapp.dao.OrdinateurDao;
+import com.monapp.entity.Materiel;
 import com.monapp.entity.Ordinateur;
+import com.monapp.entity.Stagiaire;
 
 @Transactional
 @Repository
@@ -31,9 +33,9 @@ public class OrdinateurDaoImpl implements OrdinateurDao {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		CriteriaQuery<Ordinateur> crit = cb.createQuery(Ordinateur.class);
 		Root<Ordinateur> r = crit.from(Ordinateur.class);
-		
+
 		crit.select(r);
-		
+
 		return em.createQuery(crit).getResultList();
 	}
 
@@ -50,6 +52,10 @@ public class OrdinateurDaoImpl implements OrdinateurDao {
 
 	@Override
 	public void delete(Ordinateur entity) {
+		Stagiaire stagiaire = entity.getStagiaire(); 
+		if(stagiaire != null) {
+			stagiaire.setOrdinateur(null); 
+		}
 		entity = em.merge(entity);
 		em.remove(entity);
 	}

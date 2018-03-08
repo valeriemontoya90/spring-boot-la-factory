@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.monapp.dao.TechnicienDao;
+import com.monapp.entity.Materiel;
 import com.monapp.entity.Technicien;
 
 @Transactional
@@ -42,6 +43,11 @@ public class TechnicienDaoImpl implements TechnicienDao {
 
 	@Override
 	public void delete(Technicien entity) {
+		List<Materiel> materiels = entity.getMatos(); 
+		for(Materiel m : materiels) 
+		{ 
+			m.setTechnicien(null); 
+		} 
 		entity = em.merge(entity);
 		em.remove(entity);
 

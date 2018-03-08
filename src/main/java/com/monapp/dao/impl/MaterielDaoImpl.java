@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -36,6 +37,14 @@ public class MaterielDaoImpl implements MaterielDao {
 		
 		return em.createQuery(crit).getResultList();
 	}
+	@Override
+	public List<Materiel> findAllByTechnicienId(Integer technicienId) {
+		String querystring = "SELECT M.id, M.code, M.cout, M.isDisponible, M.technicien FROM Materiel M "
+				+ "WHERE M.technicien.id = "+technicienId+")";
+		Query query = em.createQuery(querystring);
+		List<Materiel> list = query.getResultList();
+		return list;
+	}
 
 	@Override
 	public Materiel save(Materiel entity) {
@@ -53,7 +62,6 @@ public class MaterielDaoImpl implements MaterielDao {
 	public Materiel update(Materiel entity) {
 		return em.merge(entity);
 	}
-
 
 
 
